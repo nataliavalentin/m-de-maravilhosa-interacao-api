@@ -28,9 +28,7 @@ fetch('https://theblackwomanhistory.firebaseio.com/.json')
         
     });
         
-    });
-
-})
+    })
 
 .catch((erro)=>{
     console.log(erro)

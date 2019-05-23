@@ -1,6 +1,6 @@
 let box = document.querySelector('.maravilhosas__box');
 
-fetch('https://theblackwomanhistory.firebaseio.com/.json')
+fetch('http://localhost:5001/maravilhosas')
 
 .then((response)=>{
     return response.json()

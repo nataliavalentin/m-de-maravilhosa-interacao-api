@@ -45,3 +45,26 @@ fetch('http://localhost:5001/maravilhosas')
 })
 
 
+
+fetch('http://localhost:5001/maravilhosas'),{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            'first_name': nome,
+            'last_name': sobrenome,
+            'email': email,
+
+        })
+    .then((response)=>{
+        return response.json()
+
+    })
+    .then(()=>{
+
+    })
+    .catch((erro)=>{
+        console.log(erro)
+    })

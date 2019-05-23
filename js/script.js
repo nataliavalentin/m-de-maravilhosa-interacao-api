@@ -1,3 +1,35 @@
+const button = document.getElementById('botao');
+
+button.addEventListener('click', ()=>{
+    event.preventDefault();
+
+    let imputNome = document.getElementById('nomeCad').value
+    let imputImagem = document.getElementById('imagemCad').value
+
+fetch('http://localhost:5001/maravilhosas',{
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify({
+        'title': imputNome,
+        'image': imputImagem
+    })
+})
+.then((response)=>{
+    return response.json();
+})
+.then((data)=>{
+    alert('Cadastrada')
+    
+})
+.catch((erro)=>{
+    console.log(erro)
+})
+})
+
+
 let box = document.querySelector('.maravilhosas__box');
 
 fetch('http://localhost:5001/maravilhosas')
@@ -25,18 +57,22 @@ fetch('http://localhost:5001/maravilhosas')
         let nome = document.createElement('p');
         nome.innerHTML = mulher.title;
         link.appendChild(nome);
-
-        if(mulher.metadata){
-            if (mulher.metadata.image){
-                if (mulher.metadata.image.url){
-                    return imagem.src = mulher.metadata.image.url
+        if(mulher.image){
+            imagem.setAttribute('src', mulher.image)
+        }else{
+            if(mulher.metadata){
+                if (mulher.metadata.image){
+                    if (mulher.metadata.image.url){
+                        return imagem.src = mulher.metadata.image.url
+                    }
+                }else{
+                    return imagem.setAttribute('src','./img/img-mulher.png')
                 }
             }else{
                 return imagem.setAttribute('src','./img/img-mulher.png')
-            }
-        }else{
-            return imagem.setAttribute('src','./img/img-mulher.png')
-        };
+            };
+
+        }
     })
 })
 
@@ -44,27 +80,3 @@ fetch('http://localhost:5001/maravilhosas')
     console.log(erro)
 })
 
-
-
-fetch('http://localhost:5001/maravilhosas'),{
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            'first_name': nome,
-            'last_name': sobrenome,
-            'email': email,
-
-        })
-    .then((response)=>{
-        return response.json()
-
-    })
-    .then(()=>{
-
-    })
-    .catch((erro)=>{
-        console.log(erro)
-    })

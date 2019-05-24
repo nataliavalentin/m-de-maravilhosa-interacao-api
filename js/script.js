@@ -64,7 +64,7 @@ fetch('http://localhost:5001/maravilhosas')
             const cardPai = thisCard.parentElement;
 
 
-            fetch('http://localhost:5001/maravilhosas', {
+            fetch('http://localhost:5001/maravilhosas/'+mulher.id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

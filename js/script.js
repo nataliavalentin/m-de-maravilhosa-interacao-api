@@ -1,4 +1,4 @@
-const button = document.getElementById('botao');
+let button = document.getElementById('botao');
 
 button.addEventListener('click', ()=>{
     event.preventDefault();
@@ -28,8 +28,6 @@ fetch('http://localhost:5001/maravilhosas',{
     console.log(erro)
 })
 })
-
-
 let box = document.querySelector('.maravilhosas__box');
 
 fetch('http://localhost:5001/maravilhosas')
@@ -52,11 +50,44 @@ fetch('http://localhost:5001/maravilhosas')
         let imagem = document.createElement('img');
         imagem.setAttribute('class','img-responsive');
         link.appendChild(imagem);
-    
+
+        let delet = document.createElement('button');
+        delet.setAttribute('data-id', mulher.id);
+        delet.innerHTML = 'X';
+        perfil.appendChild(delet);
+
+        delet.addEventListener('click', () => {
+            console.log('vou deletar')
+
+            console.log('vou deletar')
+            const thisCard = delet.parentElement;
+            const cardPai = thisCard.parentElement;
+
+
+            fetch('http://localhost:5001/maravilhosas', {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'id': delet.getAttribute('data-id')
+
+                })
+            })
+                .then(() => {
+                    cardPai.removeChild(thisCard)
+
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                })
+        })
     
         let nome = document.createElement('p');
         nome.innerHTML = mulher.title;
         link.appendChild(nome);
+
         if(mulher.image){
             imagem.setAttribute('src', mulher.image)
         }else{
@@ -79,4 +110,5 @@ fetch('http://localhost:5001/maravilhosas')
 .catch((erro)=>{
     console.log(erro)
 })
+
 
